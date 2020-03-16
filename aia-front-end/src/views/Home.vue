@@ -129,7 +129,7 @@ export default class Home extends Vue {
   }
 
   get tableHeigth() {
-    return this.clientHeight && this.clientHeight - 60 - 50.66
+    return this.clientHeight && this.clientHeight - 60 - 50.66;
   }
 }
 </script>
