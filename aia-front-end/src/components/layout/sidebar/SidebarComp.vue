@@ -1,56 +1,31 @@
 <template>
-  <el-aside
-    width="200px"
-    style="background-color: rgb(238, 241, 246)"
+  <a-layout-sider
+    :trigger="null"
+    collapsible
+    v-model="collapsed"
   >
-    <el-menu :default-openeds="['1', '3']">
-      <el-submenu index="1">
-        <template slot="title"><i class="el-icon-message"></i>导航一</template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-submenu index="2">
-        <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="2-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="2-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-submenu index="3">
-        <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="3-1">选项1</el-menu-item>
-          <el-menu-item index="3-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="3-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="3-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-    </el-menu>
-  </el-aside>
+    <div class="logo">
+      <span class="logo-name">AIA</span>
+    </div>
+    <a-menu
+      theme="dark"
+      mode="inline"
+      :defaultSelectedKeys="['1']"
+    >
+      <a-menu-item key="1">
+        <a-icon type="home" />
+        <span>首页</span>
+      </a-menu-item>
+      <a-menu-item key="2">
+        <a-icon type="book" />
+        <span>图书管理</span>
+      </a-menu-item>
+      <a-menu-item key="3">
+        <a-icon type="upload" />
+        <span>nav 3</span>
+      </a-menu-item>
+    </a-menu>
+  </a-layout-sider>
 </template>
 
 <script lang="ts">
@@ -63,12 +38,26 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   },
 })
 export default class SidebarComp extends Vue {
+  @Prop({ default: false, required: true })
+  private collapsed!: boolean;
 
+  public mounted() {
+    console.log('collapsible : ', this.collapsed);
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.el-aside {
-  color: #333;
+.logo {
+  height: 38px;
+  // background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+  line-height: 38px;
+  text-align: center;
+}
+.logo-name {
+  color: #e6f7ff;
+  font-size: 30px;
+  letter-spacing: 3px;
 }
 </style>

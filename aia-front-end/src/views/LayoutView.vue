@@ -1,83 +1,64 @@
 <template>
-  <el-container>
-    <!-- 侧边栏容器 -->
-    <SidebarComp />
+  <a-layout id="components-layout-demo-custom-trigger">
+    <!-- 侧边栏 -->
+    <SidebarComp :collapsed="collapsed" />
 
-    <el-container>
-      <!-- 头部 -->
-      <el-header style="text-align: right; font-size: 12px">
-        <HeaderComp />
-      </el-header>
-      <!-- 中间主体 -->
-      <!-- <MainComp /> -->
-      <!-- <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
-          <i
-            class="el-icon-setting"
-            style="margin-right: 15px"
-          ></i>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>查看</el-dropdown-item>
-            <el-dropdown-item>新增</el-dropdown-item>
-            <el-dropdown-item>删除</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <span>王小虎</span>
-      </el-header> -->
-
-      <el-main>
-        <el-table
-          :data="tableData"
-          :height="tableHeigth"
-          border
-          stripe
-        >
-          <el-table-column
-            prop="date"
-            label="日期"
-            width="140"
-          >
-          </el-table-column>
-          <el-table-column
-            prop="name"
-            label="姓名"
-            width="120"
-          >
-          </el-table-column>
-          <el-table-column
-            prop="address"
-            label="地址"
-          >
-          </el-table-column>
-        </el-table>
-      </el-main>
-    </el-container>
-  </el-container>
+    <a-layout>
+      <!-- 折叠按钮 -->
+      <a-layout-header style="background: #fff; padding: 0">
+        <a-icon
+          class="trigger"
+          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+          @click="()=> collapsed = !collapsed"
+        />
+      </a-layout-header>
+      <!-- 中间内容 -->
+      <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
+        Content
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import SidebarComp from '@/components/layout/sidebar/SidebarComp.vue';
-import HeaderComp from '@/components/layout/header/HeaderComp.vue';
-import MainComp from '@/components/layout/main/MainComp.vue';
+// import HeaderComp from '@/components/layout/header/HeaderComp.vue';
+// import MainComp from '@/components/layout/main/MainComp.vue';
 
 @Component({
   components: {
     // 侧边栏
     SidebarComp,
-    HeaderComp,
-    MainComp,
+    // HeaderComp,
+    // MainComp,
   },
 })
 export default class LayoutView extends Vue {
-
+  // 左侧导航是否折叠
+  private collapsed: boolean = false;
 }
 </script>
 
 <style lang="scss" scoped>
-.el-header {
-  background-color: #b3c0d1;
-  color: #333;
-  line-height: 60px;
+#components-layout-demo-custom-trigger {
+  height: 100%;
+}
+#components-layout-demo-custom-trigger .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
 }
 </style>
